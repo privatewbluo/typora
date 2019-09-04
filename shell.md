@@ -3436,7 +3436,15 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_166.png)
 
+## Merge
 
+1. git checkout  master 
+
+   git merge 0904 #meger branch 0904 to master 
+
+2. git branch -d  0904 :删除分支
+
+3. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_167.png)
 
 ## Fork
 
