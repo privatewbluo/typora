@@ -3456,6 +3456,8 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 
 <span style='background-color:lightgreen'>**-->原理可以查看 git add  & git commit 的区别** </span>
 
+<span style='background-color:lightgreen'>**不过可以通过 git merge 操作，也可以在其他branch  同步**</span>
+
 1. git checkout  master 
 
    git merge 0904 #meger branch 0904 to master 
