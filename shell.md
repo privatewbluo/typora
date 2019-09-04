@@ -3407,7 +3407,7 @@ git pull  :**更新当前分支所有信息到本地**
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_117.png)
 
-git pull origin master  : 更新master 下最新文件信息
+git pull origin master  : 更新 orign 中 master 下最新文件信息
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_117.png)
 
@@ -3426,9 +3426,11 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 ### QA
 
 1. 如何将本地repository push 到 github上？
-
-   
-
+   - step one :在github 上创建repository 
+   - step two : git remote add typora https://github.com/privatewbluo/typora.git
+   - step three  : git  pull typora master  :本地同步 github上typora master 分支信息
+   - step four : git add  & git commit 
+   - step five : git push typora master 将本地文件push到github上 
 2. 
 
 
@@ -3573,14 +3575,14 @@ clone repository 到个人账户
    
 5. 如何去掉 remote ?
 
+6. 
+
 git config --list :查看所有配置信息
-   ```
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_114.png)
 
-   
-   
-   cat .git 目录下 config 文件可以看到 typora remote 还没有push 功能。
+   ```
+cat .git 目录下 config 文件可以看到 typora remote 还没有push 功能。
    
    ```shell
    $ git remote set-url --push  typora git@github.corp.ebay.com:wenbluo/typora.git
