@@ -3450,6 +3450,8 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 
 ## Merge
 
+如何file 还在working direcory , 那么不管在哪个branch 都能看到or 同步
+
 1. git checkout  master 
 
    git merge 0904 #meger branch 0904 to master 
@@ -3457,6 +3459,22 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 2. git branch -d  0904 :删除分支
 
 3. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_167.png)
+
+4. website 删除分支
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_170.png)
+
+   zxcxzc
+
+## Status
+
+1. git status 可以查看变化
+
+   -->那么如果查看具体变化呢？
+
+   <span style='background-color:lightblue'>**通过git  diff  shell.md** </span>
+
+2. 
 
 ## Fork
 
