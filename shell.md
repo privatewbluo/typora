@@ -3452,6 +3452,10 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 
 如何file 还在working direcory , 那么不管在哪个branch 都能看到or 同步
 
+如果做了git commit ,就只能在当下branch 查看
+
+<span style='background-color:lightgreen'>**-->原理可以查看 git add  & git commit 的区别** </span>
+
 1. git checkout  master 
 
    git merge 0904 #meger branch 0904 to master 
