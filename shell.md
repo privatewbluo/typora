@@ -3440,13 +3440,21 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
    
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_168.png)
    
-    已经告知，将0904 分支 合并到master 主分支上。
+    **可以看出是将0904 分支 合并到master 主分支上。**
    
     git checkout master 
    
     git merge 0904 
    
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_169.png)
+   
+3. 为什么在window desktop 操作了get merge 可以同步文件，但是到github 上没有实现同步呢？
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_172.png)
+
+   <span style='background-color:lightgreen'>**这个时候需要在website 点击 pull requests** </span>
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_173.png)
 
 ## Merge
 
@@ -3470,7 +3478,7 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_170.png)
 
-   zxcxzc
+   
 
 ## Status
 
