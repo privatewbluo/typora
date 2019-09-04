@@ -3431,7 +3431,10 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
    - step three  : git  pull typora master  :本地同步 github上typora master 分支信息
    - step four : git add  & git commit 
    - step five : git push typora master 将本地文件push到github上 
-2. 
+   
+2. pull request 
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_166.png)
 
 
 
