@@ -3495,7 +3495,9 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 
    <span style='background-color:lightblue'>**通过git  diff  shell.md** </span>
 
-2. 
+2. 那git diff 是跟 什么时候的file 作比较？
+
+   跟 committed 到repository 的文件做比较
 
 ## Fork
 
@@ -3789,7 +3791,20 @@ git tag  : 可以查看已经有那些标签
 ### QA :difference Branch & Tag
 
 - 什么时候创建tag ?
-- 
+
+  **当下repository 的一个 snapshot ,一个镜像。是不可变的，但是branch下的files 都是可以变的**
+
+  
+
+- <a href='https://semver.org/lang/zh-CN/'>tag name</a>
+
+- 删除tag  git tag -d
+
+- **tag 与 release 关系**![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_176.png)
+
+  <span style='background-color:lightgreen'>**每有一个tag 就有一个release** </span>
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_177.png)
 
 ## Release 
 
