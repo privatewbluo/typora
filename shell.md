@@ -3497,7 +3497,13 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
 
 2. 那git diff 是跟 什么时候的file 作比较？
 
-   跟 committed 到repository 的文件做比较
+   **跟 committed 到repository 的文件做比较**
+   
+   --> git 文件有三种状态： modified,staged ,committed .
+   
+   git add xxx --> staged
+   
+   git commit xxx -m 'xxx' -->commited
 
 ## Fork
 
