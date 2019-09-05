@@ -2035,6 +2035,34 @@ background :
 
 - https://blog.csdn.net/puqutogether/article/details/41677725
 
+- ```sql
+  
+  insert overwrite table dw_clsfd.clsfd_motor_active_user_weekly_tot
+  select  clsfd_sum_dt,
+  clsfd_site_id,
+  week_id,
+  active_users,
+  datachange_lasttime
+  from (
+  select clsfd_sum_dt,
+  clsfd_site_id,
+  week_id,
+  active_users,
+  datachange_lasttime,
+  row_number()over(partition by clsfd_site_id ,clsfd_sum_dt order by datachange_lasttime desc )as rk 
+  from  dw_clsfd.clsfd_motor_active_user_weekly_tot
+  )as a 
+  where a.rk=1
+  ```
+
+  为什么在zeta 跑文件最终是：![](C:\Users\wenbluo\Desktop\wbluo\hive\p_125.png)
+
+  在unix /shell cli 跑最终文件是：
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\hive\p_126.png)
+
+  
+
 ### Hive  Config File
 
 /apache/hive/conf   <span style='color:red'>**-->通过$PATH可以查看路径**</span>

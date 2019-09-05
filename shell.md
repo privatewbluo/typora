@@ -3430,24 +3430,31 @@ git push origin master  ##将 master  branch 上的信息 推送到 origin 上
    - step two : git remote add typora https://github.com/privatewbluo/typora.git
    - step three  : git  pull typora master  :本地同步 github上typora master 分支信息
    - step four : git add  & git commit 
-   - step five : git push typora master 将本地文件push到github上 
+   - step five : git push typora 0904 将本地文件push到github上 
+   
+   -->question
+   
+   - [ ] **既然可以直接git push xxx branch  那么为什么还要tag ?**
+   - [ ] 
+   
+   
    
 2. pull request 
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_166.png)
-   
+
    有什么作用？
-   
+
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_168.png)
-   
+
     **可以看出是将0904 分支 合并到master 主分支上。**
-   
+
     git checkout master 
-   
+
     git merge 0904 
-   
+
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_169.png)
-   
+
 3. 为什么在window desktop 操作了get merge 可以同步文件，但是到github 上没有实现同步呢？
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_172.png)
@@ -3762,7 +3769,13 @@ git tag  : 可以查看已经有那些标签
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_103.png)
 
-![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_115.png)
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_174.png)
+
+<span style='background-color:orange'>**既有branch 又有 tags ,所以在 gti push typora  branch/tag  都可以**</span>
+
+-->![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_175.png)
+
+
 
 通过githup ,可以通过tag <span style='background-color:lightblue'>**DW_PDP_DWRM32943_1**</span>
 
