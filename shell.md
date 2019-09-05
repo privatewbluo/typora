@@ -3783,7 +3783,13 @@ git tag  : 可以查看已经有那些标签
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_104.png)
 
+1. 通过 git show tag_name 可以查看具体信息
+2. 
+
 ### QA :difference Branch & Tag
+
+- 什么时候创建tag ?
+- 
 
 ## Release 
 
