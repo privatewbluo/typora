@@ -4098,7 +4098,13 @@ git tag  : 可以查看已经有那些标签
 
 ## Stash
 
-临时性的将当场工作“隐藏”起来，等以后恢复工作现场后继续工作. <span style='background-color:lightblue'>**然后就可以切换git checkout master ,等其他branch 工作**</span>;
+background：
+
+**当你进行一项目中的某一部分工作，里面的东西处于一个比较杂乱的状态，而你想到转到其他分支上进行一些工作。问题是，你不想提交进行了一般的工作，否则以后你就无法回到这个工作点。**
+
+--》  为什么不可以打标签？ tag ，这样可以有一个镜像
+
+临时性的将当场工作“隐藏”起来，等以后恢复工作现场后继续工作. <span style='background-color:lightblue'>**然后就可以切换git checkout master ,等其他branch 工作**</span>;   【]
 
 git stash  ##隐藏当前工作区
 
