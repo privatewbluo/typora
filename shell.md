@@ -4104,13 +4104,25 @@ background：
 
 --》  为什么不可以打标签？ tag ，这样可以有一个镜像
 
-临时性的将当场工作“隐藏”起来，等以后恢复工作现场后继续工作. <span style='background-color:lightblue'>**然后就可以切换git checkout master ,等其他branch 工作**</span>;   【]
+临时性的将当场工作“隐藏”起来，等以后恢复工作现场后继续工作. <span style='background-color:lightblue'>**然后就可以切换git checkout master ,等其他branch 工作**</span>;   
 
 git stash  ##隐藏当前工作区
 
+原理：
+
+<span style='background-color:lightgreen'>**为了往堆栈推送一个新的储藏，只要运行** `git stash`：</span>，生成一个id 
+
 git stash list ##查看有多少stash
 
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_202.png)
+
 git stash apply  stash@{o}  : 通过apply id 来恢复
+
+ps: git apply 只是调用栈列中的stash id ,隐藏的内容仍然在栈中。
+
+git stash drop : 删除栈中apply id 
+
+<span style='background-color:lightgreen'>**git stash pop  =git stash apply + git stash drop** </span>
 
 ## Roll Back
 
