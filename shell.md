@@ -1,4 +1,4 @@
-psReference 
+![]()psReference 
 
 1. 《Unix/Linux/Osx 中的Shell 的编程》
 2. 《Linux Shell 命令行及脚本编程实例详解》
@@ -2349,15 +2349,32 @@ ps -auf | grep 16187    ## <span style ='background-color:lightgreen'>**16187 �
 
 background :代码调试
 
-- set -xv 查看所有传参后命令行内容，有助于分析实际执行的是什么命令
+- set -xv 查看所有传参后命令行内容，有助于分析实际执行的是什么命令，<span style='background-color:lightgreen'>**一种分析日志**</span>
 
-  --refer to :  xv_test.sh
+  --refer to :  bash.sh
 
-  <span style='background-color:lightblue'>**++: 表示输出结果**</span>
+  1. <span style='background-color:lightblue'>**++: 表示输出结果**</span>
+
+  2. set -x :表示调试开始 
+
+     set +x :表示调试结束
+
+  3. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_203.png)
+
+  4. 也可以直接写 
+
+     bash -x bash.sh    ## 并不用在bash.sh 内部显式 写 set -x 
+
+     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_204.png)
 
   
 
-- 
+
+
+
+## Shift 
+
+1. 
 
 ## Eval
 
@@ -3460,6 +3477,8 @@ background :分布式版本控制系统
 git config --global  user.name "wenbluo"
 
 git config --global  user.email  "wenbluo@ebay.com"
+
+也可以定义 每个 repository 的 local user.name & local user.email
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_154.png)
 
