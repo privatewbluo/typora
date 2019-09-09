@@ -2,6 +2,7 @@ psReference
 
 1. 《Unix/Linux/Osx 中的Shell 的编程》
 2. 《Linux Shell 命令行及脚本编程实例详解》
+3. 
 
 # Unix/Linux
 
@@ -19,8 +20,11 @@ psReference
 
 
 
-
 # Linux
+
+结构框架：
+
+<span style='background-color:lightblue'>**通过终端（putty or mutputty )  写shell 指令，去访问内核**</span>![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_193.png)
 
 ### background
 
@@ -581,7 +585,7 @@ winscp 本机传送文件  互信机制  ，集群内部之间是通过（ssh) �
             [wenbluo@phxdpeetl019 bin]$ pwd
             /bin
             [wenbluo@phxdpeetl019 bin]$ ll sh
-     lrwxrwxrwx 1 root root 4 Mar 28  2018 sh -> bash
+        lrwxrwxrwx 1 root root 4 Mar 28  2018 sh -> bash
             ```
 
           - bourne is standard unix shell
@@ -593,19 +597,29 @@ winscp 本机传送文件  互信机制  ，集群内部之间是通过（ssh) �
           - ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_100.png) 
 
             <span style='color:red'>**there is some difference  between  ksh  and bash/sh** </span>
-
-       2. echo $0   or echo $SHELL
+     
+            **Korn shell 集合了C shell  & Borune Shell 的优点**
+            
+            
+            
+            
        
+       2. echo $0   or echo $SHELL
+  
           ```shell
-          
+     
           [wenbluo@phxdpeetl019 ~]$ echo $0
-          -bash
+       -bash
           [wenbluo@phxdpeetl019 ~]$ echo $SHELL
-   /bin/bash
+        /bin/bash
           ```
-  
+       
+          也可以通过 cat /etc/shells ：查看支持的shell 版本
           
-  
+          ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_192.png)
+          
+          
+     
      
   
   
@@ -649,7 +663,7 @@ ps:作比较的时候，< 需要转义  " `\`<"
 | -lt、-le | 小于\小于等于 |
 | -gt、-ge | 大于\大于等于 |
 
-### 逻辑操作符
+### 逻辑操作符/布尔操作符
 
 | &&   | [[ $num -ge 90 && $num -le 100 ]]  : [90,100]  :逻辑与       |
 | ---- | ------------------------------------------------------------ |
@@ -1507,6 +1521,8 @@ ps:作比较的时候，< 需要转义  " `\`<"
 - ctrl+c ：退出指令   --暂时不用
 - clear :清屏操作
 - <a href=https://blog.csdn.net/u012528654/article/details/39085467>smart key</a>
+- ctrl+U :清空当前行
+- tab ：自动补全
 - 
 
 ## Concepts
@@ -1985,6 +2001,12 @@ background:
   
   ```
 
+## 单引号于双引号
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_180.png)
+
+## Source 
+
 
 
 ## ``命令
@@ -2361,11 +2383,73 @@ background :代码调试
 
 虽然可以指定 以四列作为展示 ，但是是否能更加美丽的展示呢？
 
+1.   列合并文件
 
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_181.png)
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_182.png)
+
+2. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_189.png)
+
+3. 列转行
+
+   paste -s  file2 
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_190.png)
+
+   行转列
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_191.png)
+
+4. 
 
 ## Email
 
- mailx -s "JOB_ID: ${JOB_ID} RUN SUCCESSFULLY!" DL-eBay-MPT-IMD-CLSFD-SAE@ebay.com;
+目前是通过mailx 发送邮件
+
+<a href='https://blog.csdn.net/Simpletwt/article/details/53811874'>配置基本信息</a>
+
+1:用什么邮箱发送？ 2：邮箱user & pwd 
+
+
+
+-  mailx -s "JOB_ID: ${JOB_ID} RUN SUCCESSFULLY!" DL-eBay-MPT-IMD-CLSFD-SAE@ebay.com;
+
+- echo 'hello world' | mail -s 'hello robert ' wenbluo@ebay.com
+
+- mail -s 'hello weekly_sc_cored' wenbluo@ebay.com < $HOME/etl_home/cronlog/dw_clsfd.cls_cronjob.$(date -d yesterday +%Y%m%d).log
+
+  #将文件 xxx.log ，发送出来
+
+  - | Arguments | Comments |
+    | --------- | -------- |
+    | -s        | subject  |
+    | -c        | 抄送     |
+    | -b        | 秘抄     |
+    | -a        | 附件     |
+    |           |          |
+    |           |          |
+    |           |          |
+
+### Sample 
+
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_179.png)
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_178.png)
+
+summary : 
+
+1. mail 最后一个参数是 **收件人,多个收件人用 空格 表示**
+2. **关键字 放在最后参数之前，不然最终结果跟图二一样，当作收件人..**
+
+
+
+
+
+- 发送html 格式邮件
+
+  
+
+- 
 
 ## Diff 
 
@@ -2611,9 +2695,128 @@ wenbluo
 
   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_135.png)
 
-## awk
+## Awk
 
 <a href='https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858470.html'> tutorial </a>
+
+### 重要参数
+
+| Argument | comment       |
+| -------- | ------------- |
+| -F       | 决定分隔符    |
+| -f       | 执行awk 文件  |
+| -v       | 定义变量      |
+| ~  /!~   | 匹配or 不匹配 |
+
+**原理：**
+
+awk '{print}' info.txt :
+
+<span  style='background-color:lightgreen'>**将info.txt 每一行记录 按顺序执行代码块  --{xxx},  此时代码块的内容只有一个print 函数**</span>
+
+
+
+
+
+### NF&NR&FNR
+
+1. NF&NR&FNR
+
+   NF : number of fields
+
+   <span style='background-color:lightblue'>**目前记录被分割的字段数**</span>
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_184.png)
+
+   **-->指定分隔符**
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_186.png)
+
+   NR:  number of records
+
+   **在awk处理多个输入文件的时候，在处理完第一个文件后，<span style='background-color:lightgreen'>NR并不会从1开始，而是继续累加</span>，因此就出现了FNR，每当处理一个新文件的时候，FNR就从1开始计数，FNR可以理解为File Number of Record**
+
+   FNR: number of rows of fields
+
+   
+
+2. 合并文件，并打印出行号
+
+   ```shell
+    awk '{print NR, $0}' class class2
+   1 zhaoyun 87 82
+   2 gunyu 22 19
+   3 liubei 80 98
+   4 caocao 12 12
+   5 guojia 99 88  61
+   
+   ##$0 ,打印出当前记录的内容。
+   
+   ```
+
+   **打印最后一列数据**
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_183.png)
+
+   
+
+### 正则表达式
+
+<span style='background-color:lightgreen'>**正则表达式必须放在斜杠内**</span>
+
+1. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_187.png)
+
+2. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_188.png)
+
+   ```shell
+   ###与上面等价
+   
+   awk 'BEGIN {FS="-"} {if {$2 ~ "etc" } {print $1} }' info.txt
+   
+   ```
+
+   先指定： 分割符是 -  ：然后匹配第二列 ==‘etc’ 的行记录，最终打印第一列
+
+   BEGIN 块
+   awk:允许你定义一个BEGIN 块，表示在开始处理输入文件中的<span style='background-color:lightblue'>**文本前执行一些初始话代码**</span>
+
+### 布尔逻辑变量
+
+&&：逻辑与   || :逻辑或
+
+```shell
+awk 'BEGIN {FS="-"} $2 ~ "Network|network" || $2 ~ "Disk" {print $2} ' info.txt
+FireWall ,Network ,Online Security etc.
+network, microsoft
+Net app ,Disk
+###查看第二列 为disk Or  network
+
+
+
+```
+
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_197.png)
+
+  只有当command 1 【grep -il table * 执行成功】，才再运行echo 
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_198.png)
+
+  
+
+- 
+
+### IF & WHILE & FOR 
+
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_185.png)
+- 
+
+### QA
+
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_180.png)
+
+  **如何输出更加整洁？ 去掉多余的空格、缩进？**
+
+  
 
 # Sudo
 
@@ -2738,6 +2941,7 @@ shell /unix 系统<span style='background-color:lightblue'>**只有一个根目�
 | $$   | 当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 |
 | $_   | 前一个命令最后一个参数![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_143.png)f![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_161.png) |
 | !!   | ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_136.png)      |
+| IFS  | **internal field seperator :分隔符号** ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_195.png) |
 
 - $$的运用
 
@@ -2796,8 +3000,13 @@ shell /unix 系统<span style='background-color:lightblue'>**只有一个根目�
   a b
   c
   
-  
   ```
+  
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_196.png)
+
+   1. 可以看到 $* ,变量之间是以 %  ：等价于  <span style='background-color:lightgreen'>"$1 % $2 "</span>  :**其中  % 是依据 IFS** 
+   2. 然后%@  :表示变量之间是有间隔的，等价于 <span style='background-color:lightgreen'> "$1"  ,"$2"</span>
 
 - 
 
@@ -2884,7 +3093,37 @@ git:目前世界上最先进的分布式[版本控制](http://lib.csdn.net/base/
 # Tips
 
 1. Ctrl+u : 清空整行
+
 2. Tab:自动补充
+
+3. <a href='http://www.myjishu.com/?p=132'>echo设置颜色</a>
+
+   - 通过 echo -e 调用颜色
+   - 字体颜色后面有个m
+
+   - \033[ :表示颜色提示符开始
+   - \003[m]:表示颜色提示符结束
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_194.png)
+
+4. **修改bash提示符ps1 /ps2 ..**
+
+   | arg  | comment       |
+   | ---- | ------------- |
+   | \u   | username      |
+   | \h   | hostname      |
+   | \w   | 完全路径      |
+   | \t   | date:当前时间 |
+   |      |               |
+   |      |               |
+
+   export PS1="\e[0;36m [\t]\u@\h \w \e[m "
+
+   - \e[ :表示颜色提升符开始
+   - \e[m :表示颜色提示符结束
+   - x;ym:颜色格式 <span style='background-color:lightblue'>  **0；36 --青色  0；34--蓝色   0；32--绿色  0；31--红色**</span>
+
+
 
 
 
@@ -2894,9 +3133,21 @@ git:目前世界上最先进的分布式[版本控制](http://lib.csdn.net/base/
 
 # Programming
 
+## Data  type 
+
+#### Array
+
+array : 从1开始计数
+
+1. 
+
+
+
 ## []  & [[]]  & (())
 
-
+- **[[]] :是一个关键字**
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_199.png)
+- 
 
 ## 分号
 
@@ -3048,7 +3299,7 @@ git:目前世界上最先进的分布式[版本控制](http://lib.csdn.net/base/
   ```
 
 
-## 流程控制
+## Process controls
 
 - if..then..fi 
 
@@ -3101,7 +3352,7 @@ git:目前世界上最先进的分布式[版本控制](http://lib.csdn.net/base/
   
   ```
 
-  C 方法：
+  C 方法：for ((xxx;xxx;xxx))
 
   ```shell
   #! /bin/bash
@@ -3407,7 +3658,7 @@ git pull  :**更新当前分支所有信息到本地**
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_117.png)
 
-git pull origin master  : 更新 orign 中 master 下最新文件信息
+git pull origin master  : **更新 orign 中 master 下最新文件信息**
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_117.png)
 
@@ -3805,6 +4056,11 @@ git tag  : 可以查看已经有那些标签
 - <a href='https://semver.org/lang/zh-CN/'>tag name</a>
 
 - 删除tag  git tag -d
+
+- 如何提交tag?
+
+  1. git push typora  lear_tag_1
+  2. git push typora --tag  : 提交所有当前branch 下的所有tag
 
 - **tag 与 release 关系**![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_176.png)
 
