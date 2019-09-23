@@ -1,0 +1,3 @@
+how to show up the current branch  in the PS1?
+
+git symbolic-ref -HEAD
