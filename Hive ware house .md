@@ -1150,7 +1150,7 @@ hdfs://ares-lvs-nn-ha/user/hive/warehouse/dw_clsfd.db/wenbluo_test_15![](C:\User
      count(1)as num
      from  dw_clsfd.wenbluo_test_10
      group by 1,2
-     order by year, month ;' >wenbluo_tmp$$;
+     order by year, month ;' >./wenbluo_tmp$$;
      
      hive -e //hive -f >  
      
@@ -2288,6 +2288,10 @@ The output columns with -count are: <span style='background-color:lightblue'>**D
   
   ```
 
+- -discp
+
+  
+  
 - -mkdir 
 
   ```shell
@@ -2408,7 +2412,7 @@ The output columns with -count are: <span style='background-color:lightblue'>**D
   
   ```
 
-  这个时候可以采用getmerge :可以系统创建目录
+  <span style='background-color:yellow'>**这个时候可以采用getmerge :可以系统创建目录**</span>
 
   ```shell
   hadoop fs -getmerge hdfs://ares-lvs-nn-ha/user/hive/warehouse/dw_clsfd.db/wenbluo_test_location/000003_0  ./wenbluo_test/test;
@@ -2433,6 +2437,10 @@ The output columns with -count are: <span style='background-color:lightblue'>**D
 
   
 
+- -discp
+
+  
+  
 - -chmod
 
   ```shell
@@ -3040,6 +3048,8 @@ EXPLAIN [EXTENDED|CBO|AST|DEPENDENCY|AUTHORIZATION|LOCKS|VECTORIZATION|ANALYZE] 
 - show tables ;
 
   show tables like 'wenbluo*';
+  
+- show databases  like 'clsfd_working'  : <span style='background-color:lightgreen'>**查看有哪些database & datamarket**</span>
 
 #### Cli Help
 

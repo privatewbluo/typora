@@ -6,7 +6,7 @@
 
 # Unix/Linux
 
-**<span style='color:orange'>linux中一切皆文件</span>**
+**<span style='color:orange'>linux一切皆文件</span>**
 
  ref:<a href=http://www.tutorialspoint.com/unix/unix-useful-commands.htm>common unix shell commands</a> &<a href=https://wiki.vip.corp.ebay.com/display/DW/Unix> wiki_unix</a> 
 
@@ -16,9 +16,23 @@
 
 2. **文件特点可以不指定 文件格式，不同的软件（notepad++,word,记事本 etc) 都可以打开**
 
+3. <span style='background-color:lightgreen'>**可执行文件 和一般文件**</span>
 
 
 
+# 常用指令
+
+1. grep &egrep
+2. awk & sed & tr
+3. find
+4. netstat & ssh & nslookup &dig &nmap &telnet
+5. ps & kill  & nohup & & 
+6. wget &curl  &apt-get
+7. tar & gzip & bzip
+8. ls  & mv &mdkir & rm & rmdir & cd  & vi & touch 
+9. echo & tail & more  & head  &cat 
+10. scp &sftp &cp
+11. read
 
 # Linux
 
@@ -245,9 +259,7 @@
 
 - ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_71.png)
 
-  <span style='background-color:lightblue'>**SSH默认端口号 ：22**</span>  :-->拓展<a href=' https://blog.csdn.net/alizee6352012/article/details/9412295 '>不指定端口号
-
-  
+  <span style='background-color:lightblue'>**SSH默认端口号 ：22**</span>  :-->拓展<a href=' https://blog.csdn.net/alizee6352012/article/details/9412295 '>不指定端口号</a>
 
   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_94.png)
 
@@ -331,7 +343,21 @@ win+run   :regedit
 
 ### 公钥和私钥
 
-#### <span style='background-color:lightgreen'>**SSH 通信**</span>   
+#### <span style='background-color:lightgreen'>**SSH 通信**</span>     (secure shell)
+
+##### 重要参数
+
+1.  -v verbose）显示与连接和传送有关的调试信息。如果命令运行不太正常的话，这个选项就会非常有用。 
+
+2.  -p 设置端口号 
+
+3. -i ：identify_file
+
+4. -o :option  
+
+   -o ServerAliveInterval=100 -o ServerAliveCountMax=3
+
+5. -t: 分配一个伪终端
 
 winscp 本机传送文件  互信机制  ，集群内部之间是通过（ssh) ，cli 与集群之间是
 
@@ -358,44 +384,76 @@ winscp 本机传送文件  互信机制  ，集群内部之间是通过（ssh) �
   ##这样ssh  到服务器B 时候就无需再次输入密码；
   
   ssh-keyscan  github.corp.ebay.com
-  ssh [-T/t] git@github.com  ：查看是否能ssh 通
   ssh -v git@github.com  :查看具体过程
   ssh-agent ：打开代理
   ssh-add /c/Users/wenbluo/.ssh/id_rsa :将密钥添加到代理中
   
-  
-  
   ```
-
-  summary:
-
-  1. 公钥密钥成对出现，互相解密
-
-  2. 公钥加密，私钥解密
-
-     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_216.png)
-
-  3. 公钥认证，私钥加密（数字签证）
-
-     -->2 & 3 作用可以解释: RSA 为非对称加密原因是： <span style='background-color:lightblue'>**公钥加密，公钥认证**</span>
-
   
 
-  ssh -vT git@github.com  : trace 
 
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_305.png)
+
+1. -f :指定公私钥的名称
+
+2. -p:指定私钥调用 密码
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_306.png)
+
+3. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_307.png)
+
+   - eval `ssh-agent`:开启代理
+   - ssh-add ./id_rsa_wenbluo :添加私钥
+   - 后面ssh 就不需要再次输入私钥密码   === ssh  ./id_rsa  10.149.255.222
+
+summary:
+
+1. 公钥密钥成对出现，互相解密
   
+2. 公钥加密，私钥解密
+  
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_216.png)
+  
+3. 公钥认证，私钥加密（数字签证）
+  
+   -->2 & 3 作用可以解释: RSA 为非对称加密原因是： <span style='background-color:lightblue'>**公钥加密，公钥认证**</span>
 
-  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_152.png)
 
-  <a href='http://yijiebuyi.com/blog/4b5c272e7058cb331098250c8e98eb3e.html'>ssh-agent </a>
 
-   <span style='background-color:lightgreen'>**eval $(ssh-agent)**</span> :开启agent
+ssh -vT git@github.com  : trace 
 
-  background: 管理密钥，当需要验证时候，自动将public key 与private key 匹对，减少重复输入密码。
 
-  <span style='background-color:lightgreen'>**ssh-add /c/Users/wenbluo/.ssh/id_rsa   :添加密钥 给agent**</span>、
 
-  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_222.png)
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_152.png)
+
+##### <a href='http://yijiebuyi.com/blog/4b5c272e7058cb331098250c8e98eb3e.html'>ssh-agent </a>
+
+ <span style='background-color:lightgreen'>**eval $(ssh-agent)**</span> :开启agent
+
+background: 管理密钥，当需要验证时候，自动将public key 与private key 匹对，减少重复输入密码。
+
+<span style='background-color:lightgreen'>**ssh-add /c/Users/wenbluo/.ssh/id_rsa   :添加密钥 给agent**</span>
+
+1. 如何查看已经代理了哪些公钥？
+
+   ssh-add -l
+
+2. 如何删除代理公钥？
+
+   ssh-add -d 
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_308.png)
+
+   
+
+sample
+
+<a href=' http://www.zsythink.net/archives/2407 '>instances</a>
+
+
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_222.png)
 
 - ssh 之 kown_hosts 的作用
 
@@ -448,29 +506,42 @@ winscp 本机传送文件  互信机制  ，集群内部之间是通过（ssh) �
 
        4. user 
 
-       5. IdentityFile:  私钥  ： 简写 ： -i
+       5. IdentityFile:  私钥(private key)  ： 简写 ： -i 
 
-          man ssh  : show us more details args
-
-          ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_219.png)
-
-          ssh -i ./id_rsa -p 22 yuebli@lvsdpeetl001.lvs.ebay.com
-
-          ssh -i ~/.ssh/id_rsa_ceph 10.148.187.208 
-
+          ```
+     ssh  10.149.255.222
+          #等价于
+     ssh -i .ssh/id_rsa 10.149.255.222
+          #其中私钥的权限是 600
+          ```
+     ```
+       
+     man ssh  : show us more details args
+       
+     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_219.png)
+       
+     ssh -i ./id_rsa -p 22 yuebli@lvsdpeetl001.lvs.ebay.com
+       
+     ssh -i ~/.ssh/id_rsa_ceph 10.148.187.208 
+       
           <span style='background-color:lightblue'>**-o ServerAliveInterval=100 -o ServerAliveCountMax=3**</span>
-
+       
           :ServerAliveInterval 每隔100s 发送一次请求，保持连接。
-
+       
           :ServerAliveCountMax:如果发送请求后没有response.则将在3*100后关闭连接
-
+       
           ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_220.png)
        
        6. 
+     ```
 
 - permission deny with publickey![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_222.png)
 
 ​       ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_223.png)
+
+
+
+<span style='background-color:lightblue'>**注意是 git 开头**</span>![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_155.png)
 
 - ```shell
   ssh -L 9000:kylin.rno.corp.ebay.com:80 liapan@phxbastion100.phx.ebay.com
@@ -482,7 +553,25 @@ winscp 本机传送文件  互信机制  ，集群内部之间是通过（ssh) �
 
 - ssh -4 -L 9000:kylin.rno.corp.ebay.com:443 wenbluo@phxbastion300.phx.ebay.com
 
-  
+- ssh -t 
+
+  <span style='background-color:lightgreen'>**background :因为当我们ssh or telnet 过远程服务器时候，并不是真正在终端执行**</span>
+
+  1. ssh -T :Disable pseudo-tty allocation  :禁止伪终端 persudo(假的)
+
+     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_300.png)
+
+     可以看到虽然ssh 到远程服务器上，但是没有所谓PS1 (命令提示符，以及环境变量)
+
+     而且通过 ps  -uxf :可以查看到 tty :这一列为？ 没有信息  ： x: 表示非终端运行程序
+
+     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_299.png)
+
+  2. ssh -t   ：显式分配终端
+
+     
+
+     
 
 - 如何生成多个ssh-keygen ?
 
@@ -508,16 +597,62 @@ winscp 本机传送文件  互信机制  ，集群内部之间是通过（ssh) �
 
 ##### hyperlink
 
-1. <a href='https://www.cnblogs.com/softidea/p/6855045.html'>ssh -t </a>
 2. <a href='C:\Users\wenbluo\Desktop\wbluo\shell\ssh_hive'>ssh_hive</a>
 
-##### 端口转发
+##### 端口转发/映射 (port forwarding )
 
 > <a href=' https://www.fengbohello.top/archives/ssh-port-forward '> sample</a>
 >
 > <a href=' https://www.cnblogs.com/keerya/p/7612715.html '>sample2</a>
+>
+> https://blog.fundebug.com/2017/04/24/ssh-port-forwarding/ 
+>
+> http://www.meilongkui.com/archives/679 
+>
+>  https://lotabout.me/2019/SSH-Port-Forwarding/   
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_276.png)
+
+
 
 ssh -C -f -N -g -L 27777:10.103.165.164:22 -p 111 b_clsfd@10.103.165.164
+
+type :
+
+本地端口转发，远程端口转发，以及动态端口转发
+
+- 本地端口转发：
+
+  1. -L 本地网卡地址:本地端口:目标地址:目标端口
+
+  2. ```shell
+     `Ssh -L :: user_b@ip_b`
+     ```
+
+     ssh -N -g -L  22222:gw001.hadoop-csi-mn.ams1.cloud:22 $(whoami)@127.0.0.1
+
+- 远程端口转发：
+
+  1.  -R 远程网卡地址:远程端口:目标地址:目标端口
+
+##### 远程指令
+
+ssh 远程机子 后仅仅是执行命令，但是不跳转过去：<span style='background-color:lightgreen'>**ssh 远程指令**</span>
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_297.png)
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_298.png)
+
+基本能完成常用的对于远程节点的管理了，几个注意的点：
+
+1. 双引号，必须有。如果不加双引号，第二个ls命令在本地执行
+2. 分号，两个命令之间用分号隔开
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_302.png)
+
+![](C:\Users\wenbluo\Desktop\python\pict_86.png)
+
+<span style='background-color:lightblue'>**注意远程指令的文件，并不是在ssh 终端，而是在hostserver**</span>
 
 ### Unix 创建软链
 
@@ -1266,9 +1401,19 @@ ps:作比较的时候，< 需要转义  " `\`<"
   
        tail -n 10 file.txt  
   
-     - 查看目录前几行：
+       tail -f :  follow :
   
+       ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_296.png)
+     
+       <span style='background-color:lightblue'>**当程序还在后台运行时候，我们可以调度查看进**</span>展。
+     
+       
+     
+     - 查看目录前几行：
+     
          ll -| head 
+         
+         
      
   6. column ：格式化输出
   
@@ -1406,130 +1551,6 @@ ps:作比较的时候，< 需要转义  " `\`<"
    **在已有的文件下，新增内容！**
   
    
-
-
-
-#### Grep
-
-(global regular expression)
-
-<a href=http://man.linuxde.net/grep>unix 常见命令大全</a>
-
-- **查找所有txt文件中，含有wenbluo字样的文件**![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_46.png)
-
-- 删除指令 grep -v ：只读不含有outgoing 的行信息，然后存放到临时文件夹，    ( invert )
-
-  并替换原始文件
-
-- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_47.png)
-
-- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_54.png)
-
-  ll -tr | grep wbluo *   实质就是 grep wbluo  *  查看所有包含wbluo 的文件
-
-  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_55.png)
-
-  grep -n ：告知在文件第几行出现；
-
-  ```shell
-  [wenbluo@phxdpeetl019 test]$ grep -in robert jobs_2 jobs_1
-  jobs_2:1:echo  'hello robert ,nice to see U'
-  ###在jobs_2:第一行出现
-  jobs_1:1:echo hello world ,hello robert;
-  ###在jobs_1:第一行出现
-  
-  ###作用可以结合 vi 中的 rownumber + SHIFT+ G 快速定位
-  ```
-
-  grep -il CLSFD_TRFC_SUM_RPT_MKT|CLSFD_DAILY_MKT_SC|CLSFD_WEEKLY_MKT_SC  * ：查找含有xxx忽略大小写的文件：
-
-  --> ll   l:list 简单列表出来
-
-  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_56.png)
-
-- ```shell
-  $ grep -i robert jobs_1 jobs_2
-  jobs_1:echo hello world ,hello robert;
-  jobs_2:echo  'hello robert ,nice to see U'
-  
-  ####grep 格式 ：partern file1  file2 
-  ####可以在多个文件中查找
-           ### : partern  *
-  [wenbluo@phxdpeetl019 test]$ grep -il robert jobs_2 jobs_1
-  jobs_2
-  jobs_1
-  ```
-
-  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_163.png)
-
-  当有空格时候，采用引号 ，进行模糊查找 
-  
-  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_164.png)
-  
-  #### Summary:
-  
-  1.   <span style='background-color:lightgreen'>**shell是使用空白字符来分隔 命令参数。**</span>
-  2. 
-  
-- <span style='background-color:lightblue'>**grep -e :匹配多个模型**</span>
-
-  ```shell
-   grep -ie 'robert' -ie 'wenbluo'  * |wc -l
-   
-   ###等价于
-  
-  egrep -i  'robert|wenbluo' * |wc -l
-  11
-  
-  
-  ```
-
-- ```shell
-  cat dw_clsfd.step2_bsc_reply.sql |grep -i p_clsfd_t.clsfd_reply_mth_sc |egrep -ni "create|delete|insert"
-  2:DELETE FROM P_CLSFD_T.CLSFD_REPLY_MTH_SC
-  3:INSERT INTO P_CLSFD_T.CLSFD_REPLY_MTH_SC
-  
-   cat dw_clsfd.step2_bsc_reply.sql |grep -ni p_clsfd_t.clsfd_reply_mth_sc |egrep -i "create|delete|insert"
-  1168:DELETE FROM P_CLSFD_T.CLSFD_REPLY_MTH_SC
-  1173:INSERT INTO P_CLSFD_T.CLSFD_REPLY_MTH_SC
-  
-  ##-ni 位置不要弄错了
-  ```
-
-- 如何通过grep 覆盖文件？
-
-   <span style='background-color:lightblue'>**删除failed 集，只保留success**</span>
-
-   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_81.png)
-
-   <span style='background-color:lightgreen'>错误做法一</span>
-
-   ```shell
-   grep -v failed  weekly_sc >weekly_sc
-   grep: input file ‘weekly_sc’ is also the output
-   [wenbluo@phxdpeetl019 ~]$ cat weekly_sc
-   [wenbluo@phxdpeetl019 ~]$ ps -u
-   ###weekly_sc文件消失
-   
-   ```
-
-   <span style='background-color:lightgreen'>**正确做法一：放到临时文件夹中/tmp**</span>
-
-   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_82.png)
-
-   <span style='background-color:lightgreen'>**最安全做法：**</span>
-
-   ```shel&#39;l
-   ]$ grep -v failed weekly_sc_bak >/tmp/weekly_sc_bak$$
-   [wenbluo@phxdpeetl019 ~]$ mv /tmp/weekly_sc_bak$$  ./weekly_sc
-   [wenbluo@phxdpeetl019 ~]$ cat weekly_sc
-   
-   ```
-   
-- grep -r "printf" *
-           在当前目录及所有子目录下递归查找调用了printf函数的行，并显示行号。
-
-- 
 
 #### 重定向 
 
@@ -1735,34 +1756,9 @@ ps:作比较的时候，< 需要转义  " `\`<"
 
 2. **转义符"\\"、**
 
-3. read命令行 ：接收键盘输入
-
-   ```shell
    
-   [wenbluo@lvsdpeetl001 ~]$ read name
-   23   
-   ###直接read +参数名字
-   [wenbluo@lvsdpeetl001 ~]$ echo $name
-   23
-   [wenbluo@lvsdpeetl001 ~]$ read -p "how old are you ?" age_value
-   how old are you ?2222
-   ###增强一种人机对话
-   [wenbluo@lvsdpeetl001 ~]$ echo $age_value
-   2222
-   
-   ```
 
-   | option  |                                                              |                      |
-   | :------ | ------------------------------------------------------------ | :------------------- |
-   | read -p | #延迟五秒，没有输入将自动退出 read -p "Input a number:" -t 5 pwd    #read [-p "提示信息"] 变量名 | echo $pwd            |
-   | read -n | read -p "Input a word:" -n 5 Word #限制输入长度为5           | echo $Word           |
-   | read -t | wait times                                                   |                      |
-   | read -d | read -dp -p "Input some words end with q:" word              | 直到输入q,将自动退出 |
-   |         |                                                              |                      |
-   |         |                                                              |                      |
-   |         |                                                              |                      |
-
-4. <span style='background-color:lightgreen'>**系统变量**</span>:
+3. <span style='background-color:lightgreen'>**系统变量**</span>:
 
    - $HOME  $PATH  $who   $CPATH
 
@@ -1902,9 +1898,9 @@ ps:作比较的时候，< 需要转义  " `\`<"
 
      
 
-5. 
+4. 
 
-6. 
+5. 
 
 #### 运算符
 
@@ -2555,9 +2551,15 @@ bash while_test &
 
 ## Ps 
 
+<a href=' http://einverne.github.io/post/2016/04/use-ps-command-to-show-current-process.html '>ps </a>
+
 background:<span style='background-color:lightblue'>**Linux中的ps命令是Process Status的缩写**</span>
 
 类似<span style='background-color:lightblue'>window下的资源管理器</span>，但是<span style='background-color:lightblue'>unxi下的只是显示瞬间行程状态</span>
+
+pstree 
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_304.png)
 
 ### 常见指令
 
@@ -2591,11 +2593,15 @@ background:<span style='background-color:lightblue'>**Linux中的ps命令是Proc
 
 a: 表示该hostname下的终端机所有程序
 
-u:表示该whoami 下（用户为主）的格式显示程序状况  --><span style='background-color:lightgreen'>**只展示用户调度的任务**</span>
+ A (e) :显示所有进程
+
+ f :显示UID,PPIP,C与STIME栏位。 
+
+u:表示该进程所有者  --><span style='background-color:lightgreen'>**只示用户调度的任务**</span>  :<span style='background-color:lightblue'>**注意要放在最后**</span>
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_141.png)
 
-x:表示显示所有程序
+<span style='background-color:lightgreen'>'**x:表示显示非终端启用的进程**</span>
 
 ```shell
  ps -u wenbluo  ## ps -u 亦可以
@@ -2607,6 +2613,11 @@ x:表示显示所有程序
 11991 ?        00:00:00 sshd
 12333 pts/46   00:00:00 bash
 ```
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_318.png)
+
+-   -f ：fully  完整输出uid ppid ,cmd C stime
+- 
 
 ps -aux | grep weekly_sc 
 
@@ -2644,7 +2655,7 @@ background :代码调试
 
   3. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_203.png)
 
-  4. 也可以直接写 
+  4. **也可以直接写** 
 
      bash -x bash.sh    ## 并不用在bash.sh 内部显式 写 set -x 
 
@@ -2700,6 +2711,147 @@ shift 2 : 表示 $3 --> $1
   date_range.cfg
   
   ```
+
+## Grep
+
+(global regular expression)
+
+<a href=http://man.linuxde.net/grep>unix 常见命令大全</a>
+
+- **查找所有txt文件中，含有wenbluo字样的文件**![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_46.png)
+
+- 删除指令 grep -v ：只读不含有outgoing 的行信息，然后存放到临时文件夹，    ( invert )
+
+  并替换原始文件
+
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_47.png)
+
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_54.png)
+
+  ll -tr | grep wbluo *   实质就是 grep wbluo  *  查看所有包含wbluo 的文件
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_55.png)
+
+  grep -n ：告知在文件第几行出现；
+
+  ```shell
+  [wenbluo@phxdpeetl019 test]$ grep -in robert jobs_2 jobs_1
+  jobs_2:1:echo  'hello robert ,nice to see U'
+  ###在jobs_2:第一行出现
+  jobs_1:1:echo hello world ,hello robert;
+  ###在jobs_1:第一行出现
+  
+  ###作用可以结合 vi 中的 rownumber + SHIFT+ G 快速定位
+  ```
+
+  grep -il CLSFD_TRFC_SUM_RPT_MKT|CLSFD_DAILY_MKT_SC|CLSFD_WEEKLY_MKT_SC  * ：查找含有xxx忽略大小写的文件：
+
+  --> ll   l:list 简单列表出来
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_56.png)
+
+- ```shell
+  $ grep -i robert jobs_1 jobs_2
+  jobs_1:echo hello world ,hello robert;
+  jobs_2:echo  'hello robert ,nice to see U'
+  
+  ####grep 格式 ：partern file1  file2 
+  ####可以在多个文件中查找
+           ### : partern  *
+  [wenbluo@phxdpeetl019 test]$ grep -il robert jobs_2 jobs_1
+  jobs_2
+  jobs_1
+  ```
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_163.png)
+
+  当有空格时候，采用引号 ，进行模糊查找 
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_164.png)
+
+  #### Summary:
+
+  1.   <span style='background-color:lightgreen'>**shell是使用空白字符来分隔 命令参数。**</span>
+  2.   
+
+- <span style='background-color:lightblue'>**grep -e :匹配多个模型**</span>
+
+  ```shell
+   grep -ie 'robert' -ie 'wenbluo'  * |wc -l
+   
+   ###等价于
+  
+  egrep -i  'robert|wenbluo' * |wc -l
+  11
+  
+  
+  ```
+
+- ```shell
+  cat dw_clsfd.step2_bsc_reply.sql |grep -i p_clsfd_t.clsfd_reply_mth_sc |egrep -ni "create|delete|insert"
+  2:DELETE FROM P_CLSFD_T.CLSFD_REPLY_MTH_SC
+  3:INSERT INTO P_CLSFD_T.CLSFD_REPLY_MTH_SC
+  
+   cat dw_clsfd.step2_bsc_reply.sql |grep -ni p_clsfd_t.clsfd_reply_mth_sc |egrep -i "create|delete|insert"
+  1168:DELETE FROM P_CLSFD_T.CLSFD_REPLY_MTH_SC
+  1173:INSERT INTO P_CLSFD_T.CLSFD_REPLY_MTH_SC
+  
+  ##-ni 位置不要弄错了
+  ```
+
+- 如何通过grep 覆盖文件？
+
+  <span style='background-color:lightblue'>**删除failed 集，只保留success**</span>
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_81.png)
+
+  <span style='background-color:lightgreen'>错误做法一</span>
+
+  ```shell
+  grep -v failed  weekly_sc >weekly_sc
+  grep: input file ‘weekly_sc’ is also the output
+  [wenbluo@phxdpeetl019 ~]$ cat weekly_sc
+  [wenbluo@phxdpeetl019 ~]$ ps -u
+  ###weekly_sc文件消失
+  
+  ```
+
+  <span style='background-color:lightgreen'>**正确做法一：放到临时文件夹中/tmp**</span>
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_82.png)
+
+  <span style='background-color:lightgreen'>**最安全做法：**</span>
+
+  ```shel'l
+  ]$ grep -v failed weekly_sc_bak >/tmp/weekly_sc_bak$$
+  [wenbluo@phxdpeetl019 ~]$ mv /tmp/weekly_sc_bak$$  ./weekly_sc
+  [wenbluo@phxdpeetl019 ~]$ cat weekly_sc
+  
+  ```
+
+- grep -r "printf" *
+      在当前目录及所有子目录下递归查找调用了printf函数的行，并显示行号。
+
+- ```shell
+  ###只看文件
+  [wenbluo@phxdpeetl019 sql_test]$ ls -l |grep ^-
+  -rwxrwxr-x 1 wenbluo wenbluo  19909 Mar 27 22:58 clsfd_daily_mkt_sc_bak.sql
+  -rw-rw-r-- 1 wenbluo wenbluo      0 Mar 28 19:00 crontab_chewu
+  -rw-rw-r-- 1 wenbluo wenbluo      0 Apr 12 00:52 CURRENT_DATE
+  -rwxrwxr-x 1 wenbluo wenbluo 112148 Apr 15 23:36 dw_clsfd.job_runner_v2.ksh
+  
+  ####只看目录
+  [wenbluo@phxdpeetl019 sql_test]$ ls -l |grep ^d
+  drwxrwxr-x 2 wenbluo wenbluo   4096 Apr 12 01:07 huangxiaoxia
+  drwxrwxr-x 2 wenbluo wenbluo   4096 Apr 24 01:44 test
+  drwxrwxr-x 2 wenbluo wenbluo   4096 Apr 16 00:13 wbluo
+  ```
+
+- -w :精确查找 word 
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_319.png)
+
+  
 
 
 ## paste
@@ -3092,12 +3244,14 @@ iptables : 就是linux 的防火墙
 4. -j :jump to target, 当满足规则时候，怎么处理？
    - ACCEPT 允许防火墙接受数据包
    - DROP 防火墙丢弃包
+   - REJECT
    - QUEUE 防火墙将数据包移交到用户空间
    - RETURN 防火墙停止执行当前链后续 rules，并返回到调用链中
 5. -sport :source port z指定源端口
 6. --dport :指定目的地端口
-7. -D :删除规则
-8. -t  :table   :目前常用filter （存放规则 ）
+7. -s :source  ip  
+8. -D :删除规则
+9. -t  :table   :目前常用filter （存放规则 ）
 
 iptables-save  : 保存规则
 
@@ -3130,6 +3284,34 @@ Telnet 是客户端-服务端的协议，**通过TCP 默认23** 端口连接到�
 
 Telnet **并不加密数据**，因此它被认为是不安全的，因为数据是以明文形式发送的，所以密码很容易被嗅探
 
+### nc
+
+netcat :
+
+实现tcp/udp 端口监听
+
+#### 重要参数
+
+- -l :Listen   
+- -v :verbose
+- -n :number  ,ip address
+- -z
+
+#### sample
+
+1. nc  -l 30008开启tcp 30008号端口
+
+   然后 nc -v localhost 9999 : 
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_320.png)
+
+2. chat server![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_321.png)
+
+   - 随意某个机子（lvs001)开启一个端口 nc -l 123123
+   - 然后在另一台机子(lvs 002) connect (lvs 001) +端口,  nc  -n  ip  123123 ，即可通讯
+
+3. 
+
 ### netstats
 
 **netstat** ：利用netstat指令可让你得知整个Linux系统的网络情况
@@ -3149,6 +3331,8 @@ Telnet **并不加密数据**，因此它被认为是不安全的，因为数据
 1. 查看端口是否开启/状态
 
    netstat -plunt |grep -i 22222
+   
+   <span style='background-color:lightblue'>**等价于 ss -plunt** </span>
 
 ### ifconfig & localhost & /etc/hosts
 
@@ -3346,15 +3530,23 @@ Telnet **并不加密数据**，因此它被认为是不安全的，因为数据
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_262.png)
 
+解压：-dkv   :decompress 
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_288.png)
+
+--> 可以看到tar.gz 文件最后 解压成 tar ， 然后原始文件消失
 
 
-### Tar
+
+
+
+## Tar
 
 生成档案袋(archvie) ,归档操作。 <span style='background-color:lightblue'>**文件后缀.tar**</span>
 
 #### 常见指令
 
--c： create an archive
+-c:create an archive
 
 -x : extract file from archive
 
@@ -3364,13 +3556,180 @@ Telnet **并不加密数据**，因此它被认为是不安全的，因为数据
 
 -v: verbose
 
--z: use gzip to compress the archive
+-z: use gzip to depress the archive
 
 ##### sample
 
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_289.png)
+
 用gzip 压缩archive 并查看.gz 有什么内容
 
-![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_264.png)
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_290.png)
+
+-->最后一个命令最为方便，无需先对tar.gz 解压成 tar ,再利用 -vtf ：第一个指令
+
+-->最后一个命令最为方便，直接采用 tar -ztvf  ，无需解压，查看文件操作。
+
+-->同样最后一个命令解压 ，可以直接用 tar -zxvf .  <span style='background-color:lightgreen'>**自动创建目录**</span>
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_291.png)
+
+## Read
+
+read命令行 ：接收键盘输入
+
+### 重要参数
+
+1. -p :print
+
+```shell
+[wenbluo@lvsdpeetl001 ~]$ read name
+23   
+###直接read +参数名字
+[wenbluo@lvsdpeetl001 ~]$ echo $name
+23
+[wenbluo@lvsdpeetl001 ~]$ read -p "how old are you ?" age_value
+how old are you ?2222
+###增强一种人机对话  : -p : print 
+[wenbluo@lvsdpeetl001 ~]$ echo $age_value
+2222
+```
+
+| option  |                                                              |                      |
+| :------ | ------------------------------------------------------------ | :------------------- |
+| read -p | #延迟五秒，没有输入将自动退出 read -p "Input a number:" -t 5 pwd    #read [-p "提示信息"] 变量名 | echo $pwd            |
+| read -n | read -p "Input a word:" -n 5 Word #限制输入长度为5           | echo $Word           |
+| read -t | wait times :等待usr 输入时间，超过时间就会终止输入  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_316.png) |                      |
+| read -d | read -dp -p "Input some words end with q:" word              | 直到输入q,将自动退出 |
+|         |                                                              |                      |
+|         |                                                              |                      |
+|         |                                                              |                      |
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_315.png)
+
+- 输入多个值时候，都赋予给最后一个参数
+
+  从文本读取内容并且赋给变量  
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_317.png)
+
+## Tr
+
+
+
+## <a herf=' http://einverne.github.io/post/2015/01/linux-command-sed.html '>Sed </a>
+
+ sed 全名叫 stream editor，是字符流编辑器，一次处理一行内容，能够完美地配合正则表达式使用。 处理时，把当前处理的行存储在临时缓冲区中，称为<span style='background-color:lightblue'>**“模式空间”（pattern space）**</span>，接着用 sed 命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕 
+
+### 主要命令
+
+-i: 直接更改文件
+
+-n:slient	 行输出
+
+-e: expression :表示 指令，被用于区分命令和文件
+
+- s:substitute 替换
+- a :append 
+- d :delete
+- i :insert
+- p:print
+- g:global
+
+1. <a href=' https://blog.imdst.com/shell-zhi-ding-xing-hou-huo-xing-qian-cha-ru/ '>如何插入缩进</a>
+
+   sed -i '75a \\\tcksum()' stm2rno_cksum_gen_v6.py | cat stm2rno_cksum_gen_v6.py >stm2rno_cksum_gen_final.py  : 转义\  \t
+
+2. 删除某行之后所有数据
+
+   sed '3,$d' file_name 
+
+   删除空白行
+
+   sed '/^$/d' file_name  ： /^$/固定搭配
+
+   删除多行
+
+   sed '1d;3d;5d;' fine_name
+
+   删除某行之外所有数据
+
+   sed '2!d' file_name
+
+   删除固定模式   
+
+   sed '/system\\|Linux /d'  file_name 
+
+   - 注意转义 \ |  不然就是匹配system|linux‘
+   - 区分大小写
+
+   
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_309.png)
+
+   --> <span style='background-color:lightblue'>**可以看到-i : 直接更改文件，并不会输出结果**</span>
+
+   --> <span style='background-color:lightblue'>**没有 -i : 并不会直接更改文件**</span>
+
+3. 显示第几行数据
+
+   sed -n '5,7' file_name
+   
+4. -n p :联合使用
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_310.png)
+
+   - -n : 是抑制每行自动打印，不管匹配没匹配上。
+
+     -->因为sed 是stream editor 对每一行的操作
+
+   - -n p  :只打印匹配的行
+
+5. 替换s
+
+   - 如何替换第几位置出现的模式  /number
+
+     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_311.png)
+
+   - 如何替换所有模式  /g
+
+     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_312.png)
+
+   - 
+
+6. 添加  -a & -i
+
+7. -c 
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_313.png)
+
+8. -e 
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_314.png)
+
+9. 
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+
+
+
+
+
+
+
+
+
 
 ## Export
 
@@ -3514,13 +3873,26 @@ wenbluo
 
 ```
 
-
-
-- ksh  与  sh 的区别
-
-
+ 
 
 1. 00 20 * * * /home/chewu/etl_home/bin/crontab.wrapper.ksh /export/home/chewu/etl_home/bin/dw_clsfd.job_runner_v2.ksh wenbluo_test > /dev/null 2>&1
+
+## CURL
+
+<a href=' http://einverne.github.io/post/2017/12/curl-usage.html '>tutorial</a>
+
+- curl -o curl.hmtl  http://einverne.github.io/post/2017/12/curl-usage.html   : 获取网站H5 信息，并保存到curl.hmtl
+
+
+
+## APT-GET & APT
+
+```shell
+sudo apt-get update 
+sudo apt-get install r-base
+```
+
+
 
 ## WGET
 
@@ -3569,50 +3941,97 @@ it;s download tools ，just like :迅雷
 
 - 卸载：
 
-  ```shell
-sudo apt-get remove postfix 
-  sudo apt-get remove --purge postfix    // 删除配置
+  
 
+  ```shell
+  sudo apt-get remove postfix 
+  sudo apt-get remove --purge postfix    // 删除配置
+  
   sudo apt-get autoremove --purge postfix    // 检查并删除无用依赖包
   ```
-  
-  ### Important args
-  
-  wget --help
-  
-  - wget -b xxx : 后台下载
-  - wget -c xxx :断点继续下载  / continue
-  - wget -t xxxx :  wget --tries=10 xxx   : 表示retry event if connection is refused
-  - wget --user-agent xxx : using  agent  to download 
-    1. how to check  wether  i use the proxy or not ?
-    2. 
-  - 
-  
-  ## SFTP/SCP/WSCP
-  
-  - 跟ssh  用法一样，先connet 远程机子![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_131.png)
-  
-    通过 help 指令，可以查看有哪些cmd 
-  
-    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_133.png)
-  
-  - <span style='background-color:lightblue'>**通过get 指令**</span>，将远程的file cp 到local     ： lls :local list![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_132.png)
-  
-  - <span style='background-color:lightblue'>**通过put指令**</span>，将local file upload  remote server
-  
-    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_134.png)
-  
-  - scp
-  
-    ```shell
-           scp ./while_test wenbluo@phxdpeetl019.phx.ebay.com:/home/wenbluo/etl_home/sql_test/test/while_test
-           wenbluo@phxdpeetl019.phx.ebay.com's password:   
-    ```
-  1. scp 如何做到免密操作？ 
 
-     同样将src 的id_rsa.pub cp 到 destin 的authorized_keys 中
+### Important args
 
-  2. 
+wget --help
+
+- wget -b xxx : 后台下载
+
+- wget -c xxx :断点继续下载  / continue
+
+  **Note that -c only works with FTP servers and with HTTP servers that support the "Range" header**
+
+- wget -t xxxx :  wget --tries=10 xxx   : 表示retry event if connection is refused
+
+- wget -O :output fille  : uppercase  O 
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_286.png)
+
+- wget --user-agent xxx : using  agent  to download 
+
+  1. how to check  wether  i use the proxy or not ?
+
+wget-log :
+
+​	
+
+### sample
+
+- wget -Ob qqmusic https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_287.png)
+
+  ##windows 下载都是 exe 文件
+
+  <span style='background-color:red'>**##不可以联合使用 Ob**</span>
+
+- wget https://cran.r-project.org/src/base/R-3/R-3.6.1.tar.gz 
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_284.png)
+
+  可以看到有进度条
+
+  -->后台运行 
+
+  ​	wget -b https://cran.r-project.org/src/base/R-3/R-3.6.1.tar.gz
+
+  ​	![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_285.png)
+
+  <span style='background-color:lightgreen'>**--> 后台运行会有专门的 生成日志 wget-log 查看下载结果**</span>
+
+- wget -obc R  https://cran.r-project.org/src/base/R-3/R-3.6.1.tar.gz
+
+  ##unix/linux 下载都是zip/gzip/bzip 压缩文件
+
+- 
+
+
+
+
+
+## SFTP/SCP/WSCP
+
+- 跟ssh  用法一样，先connet 远程机子![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_131.png)
+
+  通过 help 指令，可以查看有哪些cmd 
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_133.png)
+
+- <span style='background-color:lightblue'>**通过get 指令**</span>，将远程的file cp 到local     ： lls :local list![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_132.png)
+
+- <span style='background-color:lightblue'>**通过put指令**</span>，将local file upload  remote server
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_134.png)
+
+- scp
+
+  ```shell
+         scp ./while_test wenbluo@phxdpeetl019.phx.ebay.com:/home/wenbluo/etl_home/sql_test/test/while_test
+         wenbluo@phxdpeetl019.phx.ebay.com's password:   
+  ```
+1. scp 如何做到免密操作？ 
+
+   同样将src 的id_rsa.pub cp 到 destin 的authorized_keys 中
+
 
 - df -h 查看空间容量
 
@@ -3620,16 +4039,29 @@ sudo apt-get remove postfix
 
 ## Awk
 
-<a href='https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858470.html'> tutorial </a>
+<a href='https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858470.html'> tutorial </a>&<a href=' http://einverne.github.io/post/2018/01/awk.html '>每日一练</a>
+
+基本格式：
+
+awk [option] 'scrip' file 
+
+- option : -F 
+- 可执行脚本一般要放在'{}'内部
+- awk默认分割符 为 '|n  or |t ' ,然后对每一行进行split ，输出$1,$2,$3..
+
+
 
 ### 重要参数
 
-| Argument | comment                   |
-| -------- | ------------------------- |
-| -F       | 决定分隔符 (Fields : IFS) |
-| -f       | 执行awk 文件              |
-| -v       | 定义变量                  |
-| ~  /!~   | 匹配or 不匹配             |
+| Argument | comment                                                      |
+| -------- | ------------------------------------------------------------ |
+| -F       | 决定分隔符 (Fields : IFS) （internal fileds seperator)       |
+| -f       | 执行awk 文件                                                 |
+| -v       | 定义变量                                                     |
+| ~  /!~   | 匹配or 不匹配                                                |
+| $0       | 代表当前正行记录 ： 类似迭代器，一行行读取，而不是整个文件读取 |
+| BEGIN    | 在开始执行scrip 之前先操作..                                 |
+| END      | 执行完script ，操作最后的步骤                                |
 
 **原理：**
 
@@ -3641,7 +4073,11 @@ awk '{print}' info.txt :
 
 awk '{print $0}'  info.txt
 
-
+```python
+#等价与 python :
+for  i  in line :
+     print(i)
+```
 
 **awk  与 print 函数 结合使用，并不是使用echo** 
 
@@ -3655,11 +4091,24 @@ awk '{print $0}'  info.txt
 
 1. NF&NR&FNR
 
+   NR:number of rows
+
    NF : number of fields
 
    <span style='background-color:lightblue'>**目前记录被分割的字段数**</span>
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_184.png)
+
+   <span style='background-color:orange'>**NF:列字段数总数**</span>
+
+   <span style='background-color:orange'>**$NF:调用该变量**</span>
+
+   ```shell
+   echo  one two three |awk  '{print $1"\t" $NF"\t" NF}'
+   one     three   3
+   ```
+
+   
 
    **-->指定分隔符**
 
@@ -3671,7 +4120,7 @@ awk '{print $0}'  info.txt
 
    FNR: number of rows of fields
 
-   
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_278.png)
 
 2. 合并文件，并打印出行号
 
@@ -3705,7 +4154,11 @@ awk '{print $0}'  info.txt
 
    awk /work/ xxx.file 
 
-2. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_188.png)
+2. 查找行数
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_303.png)
+   
+3. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_188.png)
 
    ```shell
    ###与上面等价
@@ -3718,6 +4171,44 @@ awk '{print $0}'  info.txt
 
    BEGIN 块
    awk:允许你定义一个BEGIN 块，表示在开始处理输入文件中的<span style='background-color:lightblue'>**文本前执行一些初始话代码**</span>
+
+
+
+### 数值计算
+
+1. 赋值
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_279.png)
+
+   - <span style='background-color:lightgreen'>**{.....} : .....之间以 ； 作为命令结束符号**</span>
+
+2. ++  +=  / % ^
+
+3. 统计 domain.txt 文件中，出现baidu 字样次数统计
+
+   ```shell
+   #!/bin/bash 
+   for file in $@;do   ## for xx do ;done ;
+   if [[ -f $file ]];do
+   echo 'the file is exists: $file'
+   awk '/baidu/ {count+=1 ; print $0 "\t" print $count}' <$file
+   else
+   echo "$file is not a file ,please specifiy a file"
+   fi 
+   done
+   ```
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_283.png)
+
+### Begin & END![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_282.png)
+
+ 
+
+```shell
+awk 'BEGIN {print "lets start to make a count:\n"} {total+=$NF} END {print total}' fruit
+```
+
+
 
 ### 布尔逻辑变量
 
@@ -3811,7 +4302,21 @@ shell /unix 系统<span style='background-color:lightblue'>**只有一个根目�
   sudo mount /dev/vde /export/home
   ```
 
-- 
+
+# Unique
+
+uniq :查看文件重复行or 去重
+
+## main args
+
+- ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_292.png)
+
+sample 
+     1:![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_293.png)
+
+​      2: <span style='background-color:pink'>**如何快速合并文件变成一个一个不含重复值的file ?**</span>
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_294.png)
 
 # Define Function
 
@@ -3895,13 +4400,33 @@ shell /unix 系统<span style='background-color:lightblue'>**只有一个根目�
 
 # Special Argument
 
+{}  ?  [] ~    **:五个元字符**
+
+* ' *  &  ? ':正则表达式 
+
+  因此在  expr $a *  5   是错误写法 ，要转义 对元字符
+
+  ```shell
+  wenbluo@lvsdpeetl002 ~  expr  $a * 10
+  expr: syntax error
+  wenbluo@lvsdpeetl002 ~  expr  $a \* 10
+  100
+  
+  ```
+
+  
+
+*  "[] {}"
+
+* " ~" :当前主目录   ==  cd  
+
 | 变量 | 含义                                                         |
 | ---- | ------------------------------------------------------------ |
 | $0   | **当前脚本的文件名/or 开机启动运行的哪个版本shell**          |
 | $n   | 传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。 |
 | $#   | 传递给脚本或函数的参数个数。                                 |
 | $*   | 传递给脚本或函数的所有参数。                                 |
-| $@   | 传递给脚本或函数的所有参数。被双引号(" ")包含时，与 $* 稍有不同，下面将会讲到。 |
+| $@   | 传递给脚本或函数的所有参数。<span style='background-color:lightgreen'>**被双引号(" ")包含时，与 $* 稍有不同**</span>，下面将会讲到。 |
 | $?   | 上个命令的退出状态，或函数的返回值。                         |
 | $$   | 当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 |
 | $_   | 前一个命令最后一个参数![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_143.png)f![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_161.png) |
@@ -3959,14 +4484,17 @@ shell /unix 系统<span style='background-color:lightblue'>**只有一个根目�
   do
   echo $arg
   done
-  
   [wenbluo@phxdpeetl019 test]$ ./arg_2.sh 'a b' c
   number o arguments passed is 2
   a b
   c
   
+  ###这个是时候 一定要打""
+  
   ```
   
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_280.png)
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_196.png)
 
@@ -4580,7 +5108,31 @@ git config --help
      第一次修改 -> `git add` -> 第二次修改 -> `git commit`
      
      你看，我们前面讲了，Git管理的是修改，当你用`git add`命令后，在工作区的第一次修改被放入暂存区，准备提交，但是，在工作区的第二次修改并没有放入暂存区，所以，`git commit`只负责把暂存区的修改提交了，也就是第一次的修改被提交了，第二次的修改不会被提交。
+     
      ```
+     
+     -->如果回滚commit 操作？
+     
+     1. git reflog 查看提交记录
+     
+        ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_322.png)
+     
+     2. Case  one :
+     
+        重新修改commit 的comment 
+        git commit --amend 
+     
+        Case two:
+     
+        重新撤回commit ，但并不影响git add
+     
+        Case  three:
+     
+        重新撤回commit,以及git add
+     
+        Case Four:
+     
+        
      
    - git rm : 删除文件  
 
@@ -4685,6 +5237,10 @@ git config --help
    git checkout -- test.out 
 
    其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+
+   - rm stm2rno_cksum_gen_lib.py  :仅仅是删除本地文件，并没有删除远程文件
+
+     正确做法： <span style='background-color:lightblue'>**git rm stm2rno_cksum_gen_lib.py** </span>
 
 4. 
 
@@ -4854,6 +5410,8 @@ clone repository 到个人账户
 
 <span style='background-color:lightgreen'>**只有clone 之后才能添加remote?  目的是能更改github 上的repository** </span>
 
+<span style='background-color:red'>**如果没有origin ，需要手动 git remote add origin xxxxx 再后续 git remote set-url --push/--add**</span>
+
 <span style='background-color:lightblue'>**如何远程通信github 上的repository？**</span>
 
 你已经在本地创建了一个git仓库后，又想在Github创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库协作，一举多得 。
@@ -4866,8 +5424,6 @@ clone repository 到个人账户
     git remote set-url git@github.scm.corp.ebay.com:APD/DINT-CLSFD.git
     
    ```
-
-   <span style='background-color:lightblue'>**注意是 git 开头**</span>![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_155.png)
 
    ##### QA
 
@@ -4882,7 +5438,7 @@ clone repository 到个人账户
      4. step_4:git remote add origin xxx
 
         ```shell
-        wenbluo@L-SHC-16505239 MINGW64 ~/Desktop/typora (master)
+     wenbluo@L-SHC-16505239 MINGW64 ~/Desktop/typora (master)
         $ git remote add orgin  https://github.corp.ebay.com/wenbluo/typora.git
         
         wenbluo@L-SHC-16505239 MINGW64 ~/Desktop/typora (master)
@@ -4891,7 +5447,7 @@ clone repository 到个人账户
         orgin   https://github.corp.ebay.com/wenbluo/typora.git (push)
         ##与github上的repository创建连接
         ```
-
+   
      5. step_5:git push -u origin master
 
 2. git remote set-url  push
@@ -4901,6 +5457,8 @@ clone repository 到个人账户
    ```shell
    git remote set-url --push origin git@github.scm.corp.ebay.com:APD/DINT-CLSFD.git
    ```
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_277.png)
 
    -   git remote add origin  git@github.scm.corp.ebay.com:APD/DINT-CLSFD.git
 
@@ -4939,6 +5497,8 @@ clone repository 到个人账户
    ```
    
 5. 如何去掉 remote ?
+
+   git remote remove origin 
 
 6. 
 
@@ -5030,7 +5590,17 @@ git branch --help
   
 ```
 
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_301.png)
+
+**git  push origin --delete typora : 删除远程repository 分支**
+
+同样也可以删除Tag 标签
+
+**git push origin --delete tag_name** 
+
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_106.png)
+
+
 
 <span style='background-color:lightblue'>**git checkout master : 切换 master 主分支**</span>的时候，发现是我们在ad_cube 修改的readme.txt <span style='background-color:lightgreen'>**文件 并没有影响  master 上的文件 ！**</span>
 
@@ -5200,3 +5770,7 @@ git stash drop : 删除栈中apply id
 
 1. <a href='https://www.cnblogs.com/kevingrace/p/7107408.html'>how to send mail by localhost </a>
 2. 
+
+
+
+# 

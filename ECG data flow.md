@@ -347,13 +347,17 @@ apollo phx -->will be remove  and  migrate apollo  rno --> for analysis  / query
 
    ![]()
 
-6. 注意事项：
+6. search  the container 
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\uc_1.png)
+
+7. 注意事项：
 
    - jobs and jobplans : 要title 名称一致
    - attributes  配置注意 hostname 
    - Variables & Prompts  and process 
-   
-7. ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_96.png)
+
+8. ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_96.png)
 
    <span style='background-color:yellow'>**如何设置顺序调度？**</span>![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_88.png)
 
@@ -363,7 +367,7 @@ apollo phx -->will be remove  and  migrate apollo  rno --> for analysis  / query
 
    <span style='background-color:yellow'>'**绿色是正在运行！**</span>
 
-8. ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_89.png)
+9. ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_89.png)
 
    那如何ssh 该servername 去查看日志？
 
@@ -371,33 +375,33 @@ apollo phx -->will be remove  and  migrate apollo  rno --> for analysis  / query
 
    **pwd is **   <span style='background-color:lightblue'> **unix password**</span>
 
-9. ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_90.png)
+10. ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_90.png)
 
    通过读取日志： 知道application_id  然后去BDP ,查看具体信息
 
    ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_91.png)
 
-10. 如何查看执行的是什么文件？&如何查看运行脚本？
+11. 如何查看执行的是什么文件？&如何查看运行脚本？
 
     ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_98.png)
 
     
 
     ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_93.png)
-    
+
     <span style='background-color:yellow'>**通过etl_id ：dw_clsfd.clsfd_ad_cube_daily_mp**</span>
-    
+
     ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_95.png)
-    
-11. 如何任务失败后再调度？
+
+12. 如何任务失败后再调度？
 
     ![](C:\Users\wenbluo\Desktop\wbluo\hive\p_88.png)
 
-12. 如何从herclues cluster --> apollo rno  cluster？ stm 过程
+13. 如何从herclues cluster --> apollo rno  cluster？ stm 过程
 
     ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\pict_101.png)
 
-13. 
+14. 
 
 
 ### arguments:

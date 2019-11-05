@@ -83,3 +83,7 @@
 
    We will check the details and update to you today.
 
+### W42(1013-1019)
+
+1.  from week 39 onwards   39周之前。
+2. 
