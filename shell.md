@@ -5126,12 +5126,26 @@ git config --help
      
         重新撤回commit ，但并不影响git add
      
+        - ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_323.png)
+     
+          -->还没有git commit 操作
+     
+        git reset --soft head@{2
+     
         Case  three:
      
         重新撤回commit,以及git add
      
-        Case Four:
-     
+        git reset --mixed head@{2}  == git reset head@{2}
+        
+        -->此时git status 空白，跟没有操作repostory 一样，任何文件都没有变化
+        
+        --><span style='background-color:lightgreen'>**本质：不删除工作空间的改动代码，仅仅是撤销Commit 并且撤销git add 操作**</span>
+        
+        Case four :
+        
+        
+        
         
      
    - git rm : 删除文件  
