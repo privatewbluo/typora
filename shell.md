@@ -23,7 +23,7 @@
 # 常用指令
 
 1. grep &egrep
-2. awk & sed & tr & cut
+2. awk & sed & tr & cut    --流处理
 3. find
 4. netstat & ssh & nslookup &dig &nmap &telnet
 5. ps & kill  & nohup & & 
@@ -3474,6 +3474,10 @@ netcat :
   
   最终，当命令执行完之后，就会关闭<span style='background-color:lightpink'>**当前父shell**</span>
   
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_336.png)
+  
+  **--> 服务器最终切换到了 lvsdpeetl001** 
+  
   **为了避免这个影响我们的使用，一般将exec命令放到一个shell脚本里面，用主脚本调用这个脚本，调用点处可以用bash a.sh，（a.sh就是存放该命令的脚本），这样会为a.sh建立一个sub shell去执行**
   
 - -exec 的终止是以 ; 分号，<span style='background-color:lightpink'>**作为结束符，所以 必不可少**</span>
@@ -3491,6 +3495,21 @@ netcat :
   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_257.png)
 
   {}   花括号代表前面find查找出来的文件名
+
+  ```shell
+   [00:38:01]wenbluo@lvsdpeetl001 bin  cat find_type.sh
+  #! /bin/bash
+  
+  find . -type f -name "*py*" -exec tar -zcvf archive.tar.gz {} --remove-file \;  ##查找文件归档，并删除原文件。
+  
+  
+  #!/bin/bash
+  find -type f -name "*gz*" -exec tar -zvxf {} \; -exec rm {} \;
+  ##查找压缩文档，解压并删除压缩文件。
+  
+  ```
+
+  
 
 - 查找当前目录下，所有以file 开头的目录
 
@@ -3562,6 +3581,12 @@ netcat :
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_289.png)
 
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_332.png)
+
+![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_333.png)
+
+
+
 用gzip 压缩archive 并查看.gz 有什么内容
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_290.png)
@@ -3587,6 +3612,32 @@ netcat :
    <span style='background-color:lightgrey'>**-->也可以通过file 查看文件属性**</span>
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_328.png)
+
+   
+
+   
+
+1. 如何归档后，删除原始文件？
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_334.png)
+
+   --> 妈耶错误做法  *，导致所有文件都没有了......  <span style='background-color:orange'>**--remve-files**</span>
+
+   -->正确做法，指定哪些文件归档，并删除归档后的原始文件
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_335.png)
+
+   
+
+2. 如何解压归档后，删除归档文件？
+
+   **tar -zxvf archive.tar.gz && rm archive.tar.gz**
+
+   
+
+   
+
+   
 
    
 
@@ -3633,7 +3684,49 @@ how old are you ?2222
 
 ## Tr
 
+transform: 流处理 ,对每一行字符操作
+
+### 重要参数
+
+- -d (delete)
+- 
+
 ## Cut
+
+顾名思义：流处理 就是截取每一行字符串 
+
+### 重要参数
+
+- -c (character) 
+- -b  (byte)
+- -d (delimiter)
+- -f(fileds)
+
+##### <a href=' https://blog.csdn.net/guicl0219/article/details/7241529 '>Sample</a>
+
+1. 截取至5以及10 位置，字符
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_337.png)
+
+2. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_338.png)
+
+   -->  -b :是二进制， -c :字符
+
+3. 查看所有域名
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_339.png)
+
+4. 
+
+   
+
+   
+
+   
+
+   
+
+   
 
 ## <a herf=' http://einverne.github.io/post/2015/01/linux-command-sed.html '>Sed </a>
 
@@ -3643,22 +3736,35 @@ how old are you ?2222
 
 -i: 直接更改文件
 
--n:slient	 行输出
+<span style='background-color:lightgreen'>**-n:slient	 行输出**</span>
 
 -e: expression :表示 指令，被用于区分命令和文件
 
-- s:substitute 替换
+- s:substitute 替换  -->首次匹配到的字符
+
 - a :append 
+
 - d :delete
+
+- c :convert 一整行 str_1 c str_2    --> 与s 有点区别
+
 - i :insert
+
+- l :列出非打印字符
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_340.png)
+
+  -->如何判断是空格 还是制表符？
+
 - p:print
-- g:global
+
+- g:global  -->常常跟s 一起使用，默认情况下<span style='background-color:pink'>**仅仅是替换首个匹配的字符**</span>，有了-g 是<span style='background-color:pink'>**替换整行中，所有匹配到的字符**</span>
 
 1. <a href=' https://blog.imdst.com/shell-zhi-ding-xing-hou-huo-xing-qian-cha-ru/ '>如何插入缩进</a>
 
    sed -i '75a \\\tcksum()' stm2rno_cksum_gen_v6.py | cat stm2rno_cksum_gen_v6.py >stm2rno_cksum_gen_final.py  : 转义\  \t
 
-2. 删除某行之后所有数据
+2. 删除某行之后所有数据   
 
    sed '3,$d' file_name 
 
@@ -3689,7 +3795,11 @@ how old are you ?2222
 
 3. 显示第几行数据
 
-   sed -n '5,7' file_name
+   sed -n '5,7p' file_name : 显示5-7行数据   
+   
+   显示第几行第几行
+   
+   sed -n '5p;7p' file_name 
    
 4. -n p :联合使用
 
@@ -3715,7 +3825,7 @@ how old are you ?2222
 
 6. 添加  -a & -i
 
-7. -c 
+7. -c  ：<span style='background-color:lightgreen'>**以行单位替换**</span>
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_313.png)
 
@@ -4038,7 +4148,7 @@ wget-log :
 
   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_134.png)
 
-- scp
+- scp  只能scp 文件 ，目录没法copy   ,<span style='background-color:lightgreen'>**然后覆盖dest server 原有文件。**</span>
 
   ```shell
          scp ./while_test wenbluo@phxdpeetl019.phx.ebay.com:/home/wenbluo/etl_home/sql_test/test/while_test
@@ -4047,6 +4157,14 @@ wget-log :
 1. scp 如何做到免密操作？ 
 
    同样将src 的id_rsa.pub cp 到 destin 的authorized_keys 中
+
+#### important args
+
+- -C:  压缩文件传送 ，如果文件已经是压缩文件(gzip, bzip, tar etc),则没有影响
+
+  <span style='background-color:lightgray'>**它特别之处是在于压缩是在网络传输中进行，当文件传到目标服务时，它会变回压缩之前的原始大小**</span> <span style='background-color:lightgreen'>**提高传送速度**</span>
+
+
 
 
 - df -h 查看空间容量
@@ -5393,6 +5511,14 @@ clone repository 到个人账户
 <a href='https://blog.csdn.net/sdta25196/article/details/80203152'>如何ping github.com 成功？</a>
 
 <span style='background-color:lightblue'>**从远程库 (origin)  clone 到本地环境**</span>
+
+本地环境：是指在当前pwd 目录下再mkdir repository 
+
+--> ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_331.png)
+
+<span style='background-color:lightblue'>**-->可以在任何目录下操作git clone ,并且在当前目录创建跟repository 相同名字的 directory** </span>
+
+
 
 ![](C:\Users\wenbluo\Desktop\wbluo\git\git_10.png)
 
