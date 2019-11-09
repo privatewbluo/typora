@@ -313,6 +313,20 @@ apollo phx -->will be remove  and  migrate apollo  rno --> for analysis  / query
 
 ## UC4
 
+### Env
+
+- 开发环境 ：user: development port :4000   
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\uc_3.png)
+
+  编辑job  & jobplans ( 管理job 之间的调度关系)
+
+  生成xml 然后再publish 到production env
+
+- 生产环境 ：user : production  port :1000 & 1450  
+
+  ![](C:\Users\wenbluo\Desktop\wbluo\others\work_pict\uc_4.png)
+
 1. Putty 的配置 
 
    https://wiki.vip.corp.ebay.com/display/BatchPlatform/DW+UC4+SSH+Tunneling+Setup+and+Instructions

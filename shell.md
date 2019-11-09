@@ -23,7 +23,7 @@
 # 常用指令
 
 1. grep &egrep
-2. awk & sed & tr
+2. awk & sed & tr & cut
 3. find
 4. netstat & ssh & nslookup &dig &nmap &telnet
 5. ps & kill  & nohup & & 
@@ -2643,7 +2643,7 @@ background :代码调试
 
 - set -xv 查看所有传参后命令行内容，有助于分析实际执行的是什么命令，<span style='background-color:lightgreen'>**一种分析日志**</span>
 
-  --refer to :  bash.sh
+  --refer to :  bash.sh    ：execute
 
   1. <span style='background-color:lightblue'>**++:表示原始code .+: 表示输出结果**</span>
 
@@ -3615,7 +3615,7 @@ how old are you ?2222
 
 ## Tr
 
-
+## Cut
 
 ## <a herf=' http://einverne.github.io/post/2015/01/linux-command-sed.html '>Sed </a>
 
@@ -3662,8 +3662,6 @@ how old are you ?2222
 
    - 注意转义 \ |  不然就是匹配system|linux‘
    - 区分大小写
-
-   
 
    ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_309.png)
 
@@ -4045,9 +4043,9 @@ wget-log :
 
 awk [option] 'scrip' file 
 
-- option : -F 
-- 可执行脚本一般要放在'{}'内部
-- awk默认分割符 为 '|n  or |t ' ,然后对每一行进行split ，输出$1,$2,$3..
+- option : -F  
+- 可执行脚本一般要放在'{}'内部b
+- awk<span style='background-color:lightblue'>**默认分割符 为 '|n  or |t '** </span>,然后对每一行进行split ，输出$1,$2,$3..
 
 
 
@@ -4788,14 +4786,11 @@ sudo dpkg-reconfigure tzdata  :调整时区
    date -d "$date" +%j
    127
    
-   
-   
-   
    ```
-
    
+4. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_324.png)
 
-4. 
+5. 
 
 ## Wrapper
 
@@ -4961,7 +4956,10 @@ esac
   echo $total  $?
   ```
 
+  -->注意事项
   
+  1. return  无需打括号
+  2. 
 
 ### global & local agrs
 
@@ -5428,6 +5426,14 @@ clone repository 到个人账户
 
 <span style='background-color:red'>**如果没有origin ，需要手动 git remote add origin xxxxx 再后续 git remote set-url --push/--add**</span>
 
+![](C:\Users\wenbluo\Desktop\wbluo\git\git_14.png)
+
+-->git remote add  remote_name xxx :仅仅是当前分支 有该链接..切换到其他分支 ，则没有了？
+
+<span style='background-color:lightpink'>**-->如何设置全局 remote?**</span>
+
+
+
 <span style='background-color:lightblue'>**如何远程通信github 上的repository？**</span>
 
 你已经在本地创建了一个git仓库后，又想在Github创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库协作，一举多得 。
@@ -5771,10 +5777,22 @@ git stash drop : 删除栈中apply id
 - git checkout master
   error: pathspec 'master' did not match any file(s) known to git![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_227.png)
 
+- ![](C:\Users\wenbluo\Desktop\wbluo\git\git_15.png)
+
+  -->realse ？
+
+   https://github.corp.ebay.com/clsfd/stm2rno 
+  
+  
+  
 - 如何在shell  ps1 [命令提示符]显示branch ?
 
   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_228.png)
 
+  
+  
+  
+  
   
 
 
