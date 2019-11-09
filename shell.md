@@ -3574,6 +3574,24 @@ netcat :
 
 ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_291.png)
 
+#### QA
+
+1. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_326.png)
+
+   wget -v  https://github.corp.ebay.com/wenbluo/typora/archive/typora_11_09.tar.gz
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_327.png)
+
+   -->说明你即使下载成功，但是文件格式其实是html 格式
+
+   <span style='background-color:lightgrey'>**-->也可以通过file 查看文件属性**</span>
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_328.png)
+
+   
+
+   
+
 ## Read
 
 read命令行 ：接收键盘输入
@@ -5528,7 +5546,9 @@ git remote --global add remote typora  git@github.com:privatewbluo/typora.git
 
    git remote remove origin 
 
-6. 
+6. 如何重新命名：
+
+   git remote rename old_name new_name
 
 git config --list :查看所有配置信息
 
@@ -5693,7 +5713,9 @@ git tag  : 可以查看已经有那些标签
 
   **当下repository 的一个 snapshot ,一个镜像。是不可变的，但是branch下的files 都是可以变的**
 
-  
+  <a href=' https://stackoverflow.com/questions/1457103/how-is-a-tag-different-from-a-branch-in-git-which-should-i-use-here '>what's difference between tag and branch</a>
+
+  1. 
 
 - <a href='https://semver.org/lang/zh-CN/'>tag name</a>
 
@@ -5709,6 +5731,10 @@ git tag  : 可以查看已经有那些标签
   <span style='background-color:lightgreen'>**每有一个tag 就有一个release** </span>
 
   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_177.png)
+  
+  -->可以看到release 是以tar压缩包的形式
+  
+  
 
 ## Release 
 
