@@ -5432,7 +5432,9 @@ clone repository 到个人账户
 
 <span style='background-color:lightpink'>**-->如何设置全局 remote?**</span>
 
+git remote --global add remote typora  git@github.com:privatewbluo/typora.git   
 
+<span style='background-color:lightgrey'>-**->添加关键字： --global  然后就会在.git/config  文件中会有typora 的信息**</span>
 
 <span style='background-color:lightblue'>**如何远程通信github 上的repository？**</span>
 
