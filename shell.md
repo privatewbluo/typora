@@ -5717,7 +5717,11 @@ git tag  : 可以查看已经有那些标签
 
   1. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_329.png)
 
-     -->tag 
+     -->tag 是不可变得，一般是用作于版本管理 我们可以为git打上 v.1.0.1 v.1.0.2 ...这样的标签 
+
+     git tag -a 1.00+commit_id(hash)  -m 'this is the version_1'
+
+     ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_330.png)
 
      
 
