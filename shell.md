@@ -5715,7 +5715,11 @@ git tag  : 可以查看已经有那些标签
 
   <a href=' https://stackoverflow.com/questions/1457103/how-is-a-tag-different-from-a-branch-in-git-which-should-i-use-here '>what's difference between tag and branch</a>
 
-  1. 
+  1. ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_329.png)
+
+     -->tag 
+
+     
 
 - <a href='https://semver.org/lang/zh-CN/'>tag name</a>
 
