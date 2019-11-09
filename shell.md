@@ -5440,12 +5440,16 @@ clone repository 到个人账户
 
 1. git remove set -url  fetch 
 
-   `git remote ``set``-url origin git@github.scm.corp.ebay.com:apdrm/<project>.git`
+   `git remote set-url origin git@github.scm.corp.ebay.com:apdrm/<project>.git`
 
    ```shell
-    git remote set-url git@github.scm.corp.ebay.com:APD/DINT-CLSFD.git
+   git remote set-url --push origin git@github.scm.corp.ebay.com:APD/DINT-CLSFD.git
     
    ```
+
+   ![](C:\Users\wenbluo\Desktop\wbluo\shell\shell_325.png)
+
+   
 
    ##### QA
 
@@ -5469,7 +5473,7 @@ clone repository 到个人账户
         orgin   https://github.corp.ebay.com/wenbluo/typora.git (push)
         ##与github上的repository创建连接
         ```
-   
+
      5. step_5:git push -u origin master
 
 2. git remote set-url  push
